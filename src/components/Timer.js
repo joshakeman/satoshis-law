@@ -39,16 +39,20 @@ class CustomTimer extends React.Component {
     let reset = (this.state.time != 0 && !this.state.isOn) ?
       <button onClick={this.resetTimer}>reset</button> :
       null
+    let stackSats = (this.state.time != 0 && !this.state.isOn) ?
+    <button onClick={this.resetTimer}>Stack sats</button> :
+    null
     let resume = (this.state.time != 0 && !this.state.isOn) ?
       <button onClick={this.startTimer}>resume</button> :
       null
     return(
       <div>
-        <h2><span className="bitcoin-symbol">₿</span> {this.state.time*0.02}</h2>
+        <h2><span className="bitcoin-symbol">₿</span> {parseInt(this.state.time*0.02)}</h2>
         {start}
         {resume}
         {stop}
         {reset}
+        {stackSats}
       </div>
     )
   }
