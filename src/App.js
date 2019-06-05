@@ -68,8 +68,7 @@ class App extends React.Component {
       <Container>
         <Row>
           <Col xs="6">
-            <button onClick={this.createDate}>Generat Date</button>
-            <DropdownComponent client={this.state.client} clickPete={this.clickPete} />
+            <DropdownComponent client={this.state.client} clickPete={this.clickPete} title={'Select Client'}/>
           </Col>
         </Row>
         <Row>
@@ -83,11 +82,9 @@ class App extends React.Component {
               ? <Client client={this.state.client} pic={this.state.clientPic} timerOn={this.state.timerOn}/>
               : <div></div>
             }
-            {/* <img src={require('./images/csw_gif.gif')} /> */}
           </Col>
-          {/* <Col><img src={require('./images/csw_gif.gif')} /></Col> */}
         </Row>
-
+        <button onClick={this.createDate}>Generat Date</button>
     </Container>
     </>
     )

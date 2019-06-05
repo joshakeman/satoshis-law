@@ -32,7 +32,7 @@ export default class DropdownComponent extends React.Component {
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle caret>
-          Select Client
+          {this.props.title}
         </DropdownToggle>
         <DropdownMenu>
           {this.state.client.map(client => (

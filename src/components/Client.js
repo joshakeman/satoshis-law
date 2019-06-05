@@ -23,8 +23,8 @@ class Client extends React.Component {
         return (
         <div className="client-bar">
             <div>
-                <h4>{this.props.client}</h4>
                 <img className="client-pic" src={this.props.pic} />
+                <h3>{this.props.client}</h3>
             </div>
             { this.state.timerOn
             ? <img src={require('../images/csw_gif.gif')} />

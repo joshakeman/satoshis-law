@@ -1,6 +1,7 @@
-// import '../App.css'
+import '../timer.css'
+import { Button, ButtonGroup } from 'reactstrap';
+import React from 'react'
 
-const React = require('react')
 
 class CustomTimer extends React.Component {
   constructor(props){
@@ -38,30 +39,32 @@ class CustomTimer extends React.Component {
   }
   render() {
     let start = (this.state.time == 0) ?
-      <button onClick={this.startTimer}>start</button> :
+      <Button color="success" onClick={this.startTimer}>start</Button> :
       null
     let stop = (this.state.isOn) ?
-      <button onClick={this.stopTimer}>stop</button> :
+      <Button color="danger" onClick={this.stopTimer}>stop</Button> :
       null
     let reset = (this.state.time != 0 && !this.state.isOn) ?
-      <button onClick={this.resetTimer}>reset</button> :
+      <Button color="info" onClick={this.resetTimer}>reset</Button> :
       null
 
       //this button should create a lightning invoice, and should also call the resetTimer function
     let stackSats = (this.state.time != 0 && !this.state.isOn) ?
-    <button onClick={this.createInvoice}>Stack sats</button> :
+    <Button color="warning" onClick={this.createInvoice}>Stack sats</Button> :
     null
     let resume = (this.state.time != 0 && !this.state.isOn) ?
-      <button onClick={this.startTimer}>resume</button> :
+      <Button color="primary" onClick={this.startTimer}>resume</Button> :
       null
     return(
       <div>
-        <h2><span className="bitcoin-symbol">₿</span> {parseInt(this.state.time*0.02)}</h2>
-        {start}
-        {resume}
-        {stop}
-        {reset}
-        {stackSats}
+        <h2 className="words"><span className="bitcoin-symbol">₿</span> {parseInt(this.state.time*0.02)}</h2>
+        <ButtonGroup>
+            {start}
+            {resume}
+            {stop}
+            {reset}
+            {stackSats}
+        </ButtonGroup>
       </div>
     )
   }
