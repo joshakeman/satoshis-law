@@ -1,0 +1,1 @@
+curl -H "content-type: application/json" -H "X-Api-Key: XPbc4lnaZRbCOFAB" -X GET https://api.clockify.me/api/v1/joshakeman
