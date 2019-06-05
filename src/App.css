@@ -9,3 +9,13 @@
   width: 100px;
   border-radius: 50%;
 }
+
+.client-pic {
+  width: 100px;
+  height: 100px;
+}
+
+.bitcoin-symbol {
+  color: #FF9900;
+  font-size: 52px;
+}

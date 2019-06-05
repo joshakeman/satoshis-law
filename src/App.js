@@ -1,13 +1,21 @@
 import React from 'react';
-import './App.css';
-import cswGif from './images/csw_gif.gif'
 import axios from 'axios'
+
+import Timer from 'react-compound-timer'
+import CustomTimer from './components/Timer'
+
+import { Container, Row, Col } from 'reactstrap';
+import HeaderNav from './components/NavBar' 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       pic: null,
+      client: null,
+      clientPic: null,
       stuff: 'stufff'
     }
   }
@@ -26,22 +34,61 @@ class App extends React.Component {
       }) 
     }).catch(err => {
       console.log(err)
-    })
-
-    
+    })   
   }
 
+  createDate = () => {
+    var now = new Date();
+    var isoString = now.toISOString();
+    console.log(isoString)
+  }
+
+  getPete = () => {
+    axios
+    .get('https://api.clockify.me/api/v1/workspaces/5cf6e9a6b07987371ebcf369/clients', {
+      headers: {
+        'X-Api-Key' : 'XPbc4lnaZRbCOFAB'
+      }
+    } 
+    ).then(res => {
+      console.log(res)
+      this.setState({
+        client: res.data[0].name,
+        clientPic: 'https://www.pinclipart.com/picdir/middle/12-129912_clip-art-images-sad-face-icon-png-transparent.png'
+      }) 
+    }).catch(err => {
+      console.log(err)
+    })   
+  }
 
   render() {
     return (
-      <div className="container">
+      <>
+      <HeaderNav/>
+      <Container>
+        <Row>
+          <Col xs="6"><button onClick={this.createDate}>Generat Date</button></Col>
+        </Row>
+        <Row>
+          <Col>
+            <CustomTimer />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <button onClick={this.getPete}>Select Client</button>
+            <h4>{this.state.client}</h4>
+            <img className="client-pic" src={this.state.clientPic} />
+          </Col>
+          <Col><img src={require('./images/csw_gif.gif')} /></Col>
+        </Row>
 
-      <h2>Josh Akeman</h2>
-      <img className="profilePic" src = {this.state.pic} />
-        <img src={require('./images/csw_gif.gif')} />
-      </div>
+    </Container>
+    </>
     )
   } 
 }
 
 export default App;
+
+//$1 = 12,737 satoshi
