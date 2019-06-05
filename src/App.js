@@ -6,7 +6,10 @@ import CustomTimer from './components/Timer'
 
 import { Container, Row, Col } from 'reactstrap';
 import HeaderNav from './components/NavBar' 
+import DropdownComponent from './components/DropdownComponent'
+import Client from './components/Client'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 class App extends React.Component {
@@ -16,34 +19,13 @@ class App extends React.Component {
       pic: null,
       client: null,
       clientPic: null,
-      stuff: 'stufff'
+      stuff: 'stufff',
+      clientSelected: false,
+      timerOn: false,
     }
   }
 
   componentDidMount() {
-    axios
-    .get('https://api.clockify.me/api/v1/user', {
-      headers: {
-        'X-Api-Key' : 'XPbc4lnaZRbCOFAB'
-      }
-    } 
-    ).then(res => {
-      console.log(res)
-      this.setState({
-        pic: res.data.profilePicture
-      }) 
-    }).catch(err => {
-      console.log(err)
-    })   
-  }
-
-  createDate = () => {
-    var now = new Date();
-    var isoString = now.toISOString();
-    console.log(isoString)
-  }
-
-  getPete = () => {
     axios
     .get('https://api.clockify.me/api/v1/workspaces/5cf6e9a6b07987371ebcf369/clients', {
       headers: {
@@ -61,26 +43,49 @@ class App extends React.Component {
     })   
   }
 
+  createDate = () => {
+    var now = new Date();
+    var isoString = now.toISOString();
+    console.log(isoString)
+  }
+
+  clickPete = () => {
+    this.setState({
+      clientSelected: !this.state.clientSelected
+    })   
+  }
+
+  timerStarted = () => {
+    this.setState({
+      timerOn: !this.state.timerOn
+    })   
+  }
+
   render() {
     return (
       <>
       <HeaderNav/>
       <Container>
         <Row>
-          <Col xs="6"><button onClick={this.createDate}>Generat Date</button></Col>
-        </Row>
-        <Row>
-          <Col>
-            <CustomTimer />
+          <Col xs="6">
+            <button onClick={this.createDate}>Generat Date</button>
+            <DropdownComponent client={this.state.client} clickPete={this.clickPete} />
           </Col>
         </Row>
         <Row>
           <Col>
-            <button onClick={this.getPete}>Select Client</button>
-            <h4>{this.state.client}</h4>
-            <img className="client-pic" src={this.state.clientPic} />
+            <CustomTimer timerStarted={this.timerStarted}/>
           </Col>
-          <Col><img src={require('./images/csw_gif.gif')} /></Col>
+        </Row>
+        <Row>
+          <Col>
+            { this.state.clientSelected
+              ? <Client client={this.state.client} pic={this.state.clientPic} timerOn={this.state.timerOn}/>
+              : <div></div>
+            }
+            {/* <img src={require('./images/csw_gif.gif')} /> */}
+          </Col>
+          {/* <Col><img src={require('./images/csw_gif.gif')} /></Col> */}
         </Row>
 
     </Container>

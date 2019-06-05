@@ -1,3 +1,5 @@
+// import '../App.css'
+
 const React = require('react')
 
 class CustomTimer extends React.Component {
@@ -21,10 +23,15 @@ class CustomTimer extends React.Component {
     this.timer = setInterval(() => this.setState({
       time: Date.now() - this.state.start
     }), 1);
+
+    this.props.timerStarted()
   }
   stopTimer() {
     this.setState({isOn: false})
     clearInterval(this.timer)
+    
+    this.props.timerStarted()
+
   }
   resetTimer() {
     this.setState({time: 0})
@@ -39,8 +46,10 @@ class CustomTimer extends React.Component {
     let reset = (this.state.time != 0 && !this.state.isOn) ?
       <button onClick={this.resetTimer}>reset</button> :
       null
+
+      //this button should create a lightning invoice, and should also call the resetTimer function
     let stackSats = (this.state.time != 0 && !this.state.isOn) ?
-    <button onClick={this.resetTimer}>Stack sats</button> :
+    <button onClick={this.createInvoice}>Stack sats</button> :
     null
     let resume = (this.state.time != 0 && !this.state.isOn) ?
       <button onClick={this.startTimer}>resume</button> :
