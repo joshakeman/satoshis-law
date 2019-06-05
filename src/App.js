@@ -67,12 +67,10 @@ class App extends React.Component {
       <HeaderNav/>
       <Container>
         <Row>
-          <Col xs="6">
+          <Col xs="4">
             <DropdownComponent client={this.state.client} clickPete={this.clickPete} title={'Select Client'}/>
           </Col>
-        </Row>
-        <Row>
-          <Col>
+          <Col xs="8">
             <CustomTimer timerStarted={this.timerStarted}/>
           </Col>
         </Row>
@@ -84,7 +82,9 @@ class App extends React.Component {
             }
           </Col>
         </Row>
+
         <button onClick={this.createDate}>Generat Date</button>
+
     </Container>
     </>
     )

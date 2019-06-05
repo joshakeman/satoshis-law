@@ -22,7 +22,7 @@ class Client extends React.Component {
     render() {
         return (
         <div className="client-bar">
-            <div>
+            <div className="client-wrapper">
                 <img className="client-pic" src={this.props.pic} />
                 <h3>{this.props.client}</h3>
             </div>

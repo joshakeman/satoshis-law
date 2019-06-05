@@ -39,24 +39,24 @@ class CustomTimer extends React.Component {
   }
   render() {
     let start = (this.state.time == 0) ?
-      <Button color="success" onClick={this.startTimer}>start</Button> :
+      <Button className="button" color="success" onClick={this.startTimer}>start</Button> :
       null
     let stop = (this.state.isOn) ?
-      <Button color="danger" onClick={this.stopTimer}>stop</Button> :
+      <Button className="button" color="danger" onClick={this.stopTimer}>stop</Button> :
       null
     let reset = (this.state.time != 0 && !this.state.isOn) ?
-      <Button color="info" onClick={this.resetTimer}>reset</Button> :
+      <Button className="button" color="info" onClick={this.resetTimer}>reset</Button> :
       null
 
       //this button should create a lightning invoice, and should also call the resetTimer function
     let stackSats = (this.state.time != 0 && !this.state.isOn) ?
-    <Button color="warning" onClick={this.createInvoice}>Stack sats</Button> :
+    <Button className="button" color="warning" onClick={this.createInvoice}>Stack sats</Button> :
     null
     let resume = (this.state.time != 0 && !this.state.isOn) ?
-      <Button color="primary" onClick={this.startTimer}>resume</Button> :
+      <Button className="button" color="primary" onClick={this.startTimer}>resume</Button> :
       null
     return(
-      <div>
+      <div className="wrapper">
         <h2 className="words"><span className="bitcoin-symbol">₿</span> {parseInt(this.state.time*0.02)}</h2>
         <ButtonGroup>
             {start}
