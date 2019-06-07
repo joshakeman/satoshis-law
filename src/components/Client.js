@@ -1,5 +1,7 @@
 import React from 'react'
 import '../client.css'
+import { Container, Row, Col } from 'reactstrap';
+
 
 class Client extends React.Component {
     constructor(props) {
@@ -21,15 +23,29 @@ class Client extends React.Component {
 
     render() {
         return (
-        <div className="client-bar">
-            <div className="client-wrapper">
-                <img className="client-pic" src={this.props.pic} />
-                <h3>{this.props.client}</h3>
-            </div>
-            { this.state.timerOn
-            ? <img src={require('../images/csw_gif.gif')} />
-            : null }
-        </div>
+        <Container>
+            <Row>
+                <Col xs="4" className="client-box">
+                    <img className="client-pic" src={this.props.pic} />
+                    <h3>{this.props.client}</h3>                
+                </Col>
+                <Col xs="8">
+                { this.state.timerOn
+                    ? <img className="CSW-gif" src={require('../images/csw_gif.gif')} />
+                    : null }
+                </Col>
+            </Row>
+        </Container>
+            
+        // <div className="client-bar">
+        //     <div className="client-wrapper">
+        //         <img className="client-pic" src={this.props.pic} />
+        //         <h3>{this.props.client}</h3>
+        //     </div>
+        //     { this.state.timerOn
+        //     ? <img src={require('../images/csw_gif.gif')} />
+        //     : null }
+        // </div>
     )
 }
 }

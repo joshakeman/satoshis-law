@@ -1,6 +1,8 @@
 .client-pic {
     height: 150px;
     width: 150px;
+    padding-left: 0;
+    margin-top: 10px;
 }
 
 .client-bar {
@@ -13,4 +15,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.CSW-gif {
+    width: 720px;
+    /* padding-bottom: 10px; */
+}
+
+.client-box {
+
 }

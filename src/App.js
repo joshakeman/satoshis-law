@@ -8,6 +8,7 @@ import { Container, Row, Col } from 'reactstrap';
 import HeaderNav from './components/NavBar' 
 import DropdownComponent from './components/DropdownComponent'
 import Client from './components/Client'
+import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -66,21 +67,26 @@ class App extends React.Component {
       <>
       <HeaderNav/>
       <Container>
-        <Row>
-          <Col xs="4">
-            <DropdownComponent client={this.state.client} clickPete={this.clickPete} title={'Select Client'}/>
-          </Col>
-          <Col xs="8">
-            <CustomTimer timerStarted={this.timerStarted}/>
+        <Row className="header-row">
+          <Col >
+            <h1>May, Finney & Young Attorneys at Law</h1>
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col xs="4" className="drop-down-box">
+            <DropdownComponent client={this.state.client} clickPete={this.clickPete} title={'Select Client'}/>
+            <h3 className="client-header">Client:</h3>
+          </Col>
+          <Col xs="8" >
+              <h3>Track hours</h3>
+              <CustomTimer timerStarted={this.timerStarted}/>
+          </Col>
+        </Row>
+        <Row>
             { this.state.clientSelected
               ? <Client client={this.state.client} pic={this.state.clientPic} timerOn={this.state.timerOn}/>
               : <div></div>
             }
-          </Col>
         </Row>
 
         <button onClick={this.createDate}>Generat Date</button>

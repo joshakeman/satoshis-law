@@ -1,5 +1,5 @@
 import '../timer.css'
-import { Button, ButtonGroup } from 'reactstrap';
+import { Button, ButtonGroup, Alert } from 'reactstrap';
 import React from 'react'
 
 
@@ -9,7 +9,8 @@ class CustomTimer extends React.Component {
     this.state = {
       time: 0,
       start: 0,
-      isOn: false
+      isOn: false,
+      sentInvoice: false
     }
     this.startTimer = this.startTimer.bind(this)
     this.stopTimer = this.stopTimer.bind(this)
@@ -37,34 +38,57 @@ class CustomTimer extends React.Component {
   resetTimer() {
     this.setState({time: 0})
   }
+
+  createInvoice = () => {
+    this.setState({
+      sentInvoice: !this.state.sentInvoice
+    })
+
+    const removeAlert = () => {
+      this.setState({
+        sentInvoice: !this.state.sentInvoice
+      })
+    }
+
+    setTimeout(removeAlert, 2000)
+  }
   render() {
-    let start = (this.state.time == 0) ?
+    let start = (this.state.time === 0) ?
       <Button className="button" color="success" onClick={this.startTimer}>start</Button> :
       null
     let stop = (this.state.isOn) ?
       <Button className="button" color="danger" onClick={this.stopTimer}>stop</Button> :
       null
-    let reset = (this.state.time != 0 && !this.state.isOn) ?
+    let reset = (this.state.time !== 0 && !this.state.isOn) ?
       <Button className="button" color="info" onClick={this.resetTimer}>reset</Button> :
       null
 
       //this button should create a lightning invoice, and should also call the resetTimer function
-    let stackSats = (this.state.time != 0 && !this.state.isOn) ?
+    let stackSats = (this.state.time !== 0 && !this.state.isOn) ?
     <Button className="button" color="warning" onClick={this.createInvoice}>Stack sats</Button> :
     null
-    let resume = (this.state.time != 0 && !this.state.isOn) ?
+    let resume = (this.state.time !== 0 && !this.state.isOn) ?
       <Button className="button" color="primary" onClick={this.startTimer}>resume</Button> :
       null
     return(
       <div className="wrapper">
-        <h2 className="words"><span className="bitcoin-symbol">₿</span> {parseInt(this.state.time*0.02)}</h2>
-        <ButtonGroup>
-            {start}
-            {resume}
-            {stop}
-            {reset}
-            {stackSats}
-        </ButtonGroup>
+        <div className="buttons-wrapper">
+          <h2 className="words"><span className="bitcoin-symbol">₿</span> {parseInt(this.state.time*0.02)}</h2>
+          <ButtonGroup>
+              {start}
+              {resume}
+              {stop}
+              {reset}
+              {stackSats}
+          </ButtonGroup>
+        </div>
+        <div className="alert-wrapper">
+          { this.state.sentInvoice === true ?
+            <Alert color="primary">
+             Your time was logged and your invoice was sent!
+            </Alert>
+          : null }
+        </div>
       </div>
     )
   }

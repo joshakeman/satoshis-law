@@ -1,4 +1,4 @@
-
+/* 
 .container {
   margin: auto;
   display: flex;
@@ -19,4 +19,30 @@
 .bitcoin-symbol {
   color: #FF9900;
   font-size: 52px;
+} */
+
+.header-row {
+  border-bottom: 1px solid gray;
+  margin-bottom: 20px;
+}
+
+.drop-down-box {
+  padding: 10px;
+  /* background:lightgray; */
+  position: relative;
+  height: auto;
+  border: 1px solid black;
+}
+
+.client-header {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px 10px 0 10px;
+    margin-top: 40px;
+    text-decoration: underline;
+}
+
+.col-4 {
+  padding-left: 0;
 }
