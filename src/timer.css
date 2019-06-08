@@ -15,3 +15,12 @@ font-size: 52px;
   /* border: 1px solid black; */
   display: flex;
 }
+
+.invoice-box {
+  word-wrap: break-word;
+  padding: 10px;
+}
+
+.qr-code {
+  padding: 10px;
+}

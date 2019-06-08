@@ -36,7 +36,7 @@ export default class ClientDropDown extends React.Component {
         </DropdownToggle>
         <DropdownMenu>
           {this.state.client.map(client => (
-             <span className="dropdown-item" onClick={this.props.clickPete}><DropdownItem header>{client}</DropdownItem></span>
+             <span key={client.index} className="dropdown-item" onClick={this.props.clickPete}><DropdownItem header>{client}</DropdownItem></span>
           ))}
           {/* <DropdownItem header>Header</DropdownItem>
           <DropdownItem>Some Action</DropdownItem>

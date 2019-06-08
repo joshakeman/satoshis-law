@@ -57,7 +57,7 @@ export default class CaseDropdown extends React.Component {
         </DropdownToggle>
         <DropdownMenu>
           {this.state.cases.map(c => (
-             <span className="dropdown-item" onClick={this.props.renderCase}><DropdownItem header>{c.name}</DropdownItem></span>
+             <span key={c.index} className="dropdown-item" onClick={this.props.renderCase}><DropdownItem header>{c.name}</DropdownItem></span>
           ))}
           {/* <DropdownItem header>Header</DropdownItem>
           <DropdownItem>Some Action</DropdownItem>

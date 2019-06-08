@@ -26,7 +26,7 @@ class Client extends React.Component {
         <Container>
             <Row>
                 <Col md="4" className="client-box">
-                    <img className="client-pic" src={this.props.pic} />
+                    <img className="client-pic" src='https://images-na.ssl-images-amazon.com/images/I/51dAzlTL-aL._SX466_.jpg' />
                     <h3>{this.props.client}</h3>                
                 </Col>
                 <Col md="8" className="progress-column">
