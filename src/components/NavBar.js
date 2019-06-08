@@ -30,7 +30,7 @@ export default class HeaderNav extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Satoshi's Law</NavbarBrand>
+          <NavbarBrand href="/"><img src={require('../images/satoshi-law-logo.png')}/></NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

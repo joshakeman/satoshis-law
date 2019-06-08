@@ -1,3 +1,7 @@
 .dropdown-item {
     cursor: pointer;
 }
+
+.dropdown {
+    margin-right: 10px;
+}

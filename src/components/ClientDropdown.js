@@ -2,7 +2,7 @@ import React from 'react';
 import '../dropdown.css'
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-export default class DropdownComponent extends React.Component {
+export default class ClientDropDown extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,7 +30,7 @@ export default class DropdownComponent extends React.Component {
 
   render() {
     return (
-      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} className="dropdown">
         <DropdownToggle caret>
           {this.props.title}
         </DropdownToggle>

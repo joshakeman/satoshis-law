@@ -31,7 +31,7 @@
   /* background:lightgray; */
   position: relative;
   height: auto;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .client-header {
@@ -45,4 +45,29 @@
 
 .col-4 {
   padding-left: 0;
+}
+
+.button-grouping {
+  display: flex;
+
+}
+
+.current-case {
+  /* padding-top: 30px; */
+}
+
+.case-heading {
+  padding: 40px 0 10px 0;
+  color: lightgray;
+}
+
+.client-heading {
+  padding: 10px 0 10px 0;
+  color: lightgray;
+}
+
+.tracker-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }

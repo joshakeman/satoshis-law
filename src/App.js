@@ -6,7 +6,8 @@ import CustomTimer from './components/Timer'
 
 import { Container, Row, Col } from 'reactstrap';
 import HeaderNav from './components/NavBar' 
-import DropdownComponent from './components/DropdownComponent'
+import ClientDropdown from './components/ClientDropdown'
+import CaseDropdown from './components/CaseDropdown'
 import Client from './components/Client'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,11 +23,14 @@ class App extends React.Component {
       clientPic: null,
       stuff: 'stufff',
       clientSelected: false,
+      caseSelected: false,
       timerOn: false,
+      currentCase: null
     }
   }
 
   componentDidMount() {
+    //get clients
     axios
     .get('https://api.clockify.me/api/v1/workspaces/5cf6e9a6b07987371ebcf369/clients', {
       headers: {
@@ -41,7 +45,9 @@ class App extends React.Component {
       }) 
     }).catch(err => {
       console.log(err)
-    })   
+    })  
+    
+
   }
 
   createDate = () => {
@@ -56,11 +62,21 @@ class App extends React.Component {
     })   
   }
 
+
+
   timerStarted = () => {
     this.setState({
       timerOn: !this.state.timerOn
     })   
   }
+
+  renderCase = event => {
+    console.log(event.currentTarget)
+  this.setState({
+    caseSelected: !this.state.caseSelected,
+    currentCase: event.currentTarget.textContent
+  })   
+}
 
   render() {
     return (
@@ -74,10 +90,18 @@ class App extends React.Component {
         </Row>
         <Row>
           <Col xs="4" className="drop-down-box">
-            <DropdownComponent client={this.state.client} clickPete={this.clickPete} title={'Select Client'}/>
-            <h3 className="client-header">Client:</h3>
+           <div className="button-grouping">
+           <CaseDropdown renderCase={this.renderCase} title={'Select Case'}/>
+            <ClientDropdown client={this.state.client} clickPete={this.clickPete} title={'Select Client'}/>
+           </div>
+           <h4 className="case-heading">Case:</h4>
+           {this.state.caseSelected
+            ? <h2 className="current-case">{this.state.currentCase}</h2>
+            : null
+            }
+            <h4 className="client-heading">Client:</h4>
           </Col>
-          <Col xs="8" >
+          <Col xs="8" className="tracker-box">
               <h3>Track hours</h3>
               <CustomTimer timerStarted={this.timerStarted}/>
           </Col>
@@ -89,7 +113,7 @@ class App extends React.Component {
             }
         </Row>
 
-        <button onClick={this.createDate}>Generat Date</button>
+        {/* <button onClick={this.createDate}>Generat Date</button> */}
 
     </Container>
     </>
