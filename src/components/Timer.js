@@ -12,7 +12,10 @@ class CustomTimer extends React.Component {
       start: 0,
       isOn: false,
       sentInvoice: false,
-      startTime: null
+      startTime: null,
+      durationHours: null,
+      durationMinutes: null,
+      durationSeconds: null,
     }
     this.startTimer = this.startTimer.bind(this)
     this.stopTimer = this.stopTimer.bind(this)
@@ -58,6 +61,9 @@ class CustomTimer extends React.Component {
     console.log(total)
     const endTime = moment(total).toISOString()
     console.log(endTime)
+    const duration = moment.duration("PT1M3.373S")
+    console.log(duration._data.minutes)
+    console.log(`Hours: ${duration._data.hours} Minutes: ${duration._data.minutes} seconds: ${duration._data.seconds}`)
 
     const timeEntry = {
       start: this.state.startTime,
@@ -86,7 +92,10 @@ class CustomTimer extends React.Component {
 
 
     this.setState({
-      sentInvoice: !this.state.sentInvoice
+      sentInvoice: !this.state.sentInvoice,
+      durationHours: duration._data.hours,
+      durationMinutes: duration._data.minutes,
+      durationSeconds: duration._data.seconds,
     })
 
     const removeAlert = () => {
@@ -118,22 +127,30 @@ class CustomTimer extends React.Component {
     return(
       <div className="wrapper">
         <div className="buttons-wrapper">
-          <h2 className="words"><span className="bitcoin-symbol">₿</span> {parseInt(this.state.time*0.02)}</h2>
-          <ButtonGroup>
-              {start}
-              {resume}
-              {stop}
-              {reset}
-              {stackSats}
-          </ButtonGroup>
+          {this.state.durationHours === null 
+          ? <h3 >{`Timer: ${parseInt(this.state.time)}`}</h3>
+          : <div><h3>Duration: </h3> <h4>{`Timer: ${parseInt(this.state.time)}`}</h4><h4>{`Hours billed: ${this.state.durationHours} Minutes: ${this.state.durationMinutes} seconds: ${this.state.durationSeconds}`}</h4></div>
+
+          }
+          <div>
+            <h2 className="words"><span className="bitcoin-symbol">₿</span> {parseInt(this.state.time*0.02)}</h2>
+            <ButtonGroup>
+                {start}
+                {resume}
+                {stop}
+                {reset}
+                {stackSats}
+            </ButtonGroup>
+            <div className="alert-wrapper">
+              { this.state.sentInvoice === true ?
+                <Alert color="primary">
+                Your time was logged and your invoice was sent!
+                </Alert>
+              : null }
+            </div>
+          </div>
         </div>
-        <div className="alert-wrapper">
-          { this.state.sentInvoice === true ?
-            <Alert color="primary">
-             Your time was logged and your invoice was sent!
-            </Alert>
-          : null }
-        </div>
+        
       </div>
     )
   }

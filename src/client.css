@@ -19,9 +19,14 @@
 
 .CSW-gif {
     width: 720px;
+    height: 201px;
     /* padding-bottom: 10px; */
 }
 
 .client-box {
+    padding: 10px;
+}
 
+.progress-column {
+    padding: 10px;
 }

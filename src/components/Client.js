@@ -25,11 +25,11 @@ class Client extends React.Component {
         return (
         <Container>
             <Row>
-                <Col xs="4" className="client-box">
+                <Col md="4" className="client-box">
                     <img className="client-pic" src={this.props.pic} />
                     <h3>{this.props.client}</h3>                
                 </Col>
-                <Col xs="8">
+                <Col md="8" className="progress-column">
                 { this.state.timerOn
                     ? <img className="CSW-gif" src={require('../images/csw_gif.gif')} />
                     : null }

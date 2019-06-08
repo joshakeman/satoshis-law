@@ -83,14 +83,14 @@ class App extends React.Component {
     return (
       <>
       <HeaderNav/>
-      <Container>
+      <Container className="shadow">
         <Row className="header-row">
           <Col >
             <h1>May, Finney & Young Attorneys at Law</h1>
           </Col>
         </Row>
-        <Row>
-          <Col xs="4" className="drop-down-box">
+        <Row className="top-row">
+          <Col sm="4" className="drop-down-box">
            <div className="button-grouping">
            <CaseDropdown renderCase={this.renderCase} title={'Select Case'}/>
             <ClientDropdown client={this.state.client} clickPete={this.clickPete} title={'Select Client'}/>
@@ -98,13 +98,15 @@ class App extends React.Component {
            <h4 className="case-heading">Case:</h4>
            {this.state.caseSelected
             ? <h2 className="current-case">{this.state.currentCase}</h2>
-            : null
+            : <h2 className="hidden">a</h2>
             }
             <h4 className="client-heading">Client:</h4>
           </Col>
-          <Col xs="8" className="tracker-box">
-              <h3>Track hours</h3>
-              <CustomTimer timerStarted={this.timerStarted}/>
+          <Col sm="8" className="tracker-box">
+              <div>
+                <h3 className="track-hours">Track hours</h3>
+                <CustomTimer timerStarted={this.timerStarted}/>
+              </div>
           </Col>
         </Row>
         <Row>

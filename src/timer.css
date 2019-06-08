@@ -12,6 +12,6 @@ font-size: 52px;
 
 .wrapper {
   padding: 10px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
 }
