@@ -55,30 +55,31 @@ class CustomTimer extends React.Component {
 
     const ms = moment(this.state.startTime).unix() * 1000
     const total = ms + this.state.time
-    const endTime = moment(total).unix() * 1000
+    console.log(total)
+    const endTime = moment(total).toISOString()
+    console.log(endTime)
 
     const timeEntry = {
       start: this.state.startTime,
       end: endTime,
       billable: true,
       description: "Billed meeting",
-      projectId: process.env.PROJECT_ID,
+      projectId: "5cf6ec7fb07987371ebcf5a2",
+      taskId: "5cf80359b07987371ebe6b58"
+    }
+
+    console.log(timeEntry)
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-Api-Key' : 'XPbc4lnaZRbCOFAB'
     }
 
     axios
-    .post('https://api.clockify.me/api/v1/workspaces/5cf6e9a6b07987371ebcf369/time-entries', {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Api-Key' : 'XPbc4lnaZRbCOFAB'
-      },
-      timeEntry
-    } 
+    .post('https://api.clockify.me/api/v1/workspaces/5cf6e9a6b07987371ebcf369/time-entries', timeEntry, { headers: headers} 
     ).then(res => {
       console.log(res)
-      this.setState({
-        client: res.data[0].name,
-        clientPic: 'https://www.pinclipart.com/picdir/middle/12-129912_clip-art-images-sad-face-icon-png-transparent.png'
-      }) 
+
     }).catch(err => {
       console.log(err)
     }) 
