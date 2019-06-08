@@ -105,6 +105,8 @@ class CustomTimer extends React.Component {
     }
 
     setTimeout(removeAlert, 2000)
+
+
   }
   render() {
     let start = (this.state.time === 0) ?
