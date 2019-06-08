@@ -29,6 +29,7 @@ class App extends React.Component {
     }
   }
 
+  //process.env.WORKSPACE_ID
   componentDidMount() {
     //get clients
     axios

@@ -1,7 +1,8 @@
 import '../timer.css'
 import { Button, ButtonGroup, Alert } from 'reactstrap';
 import React from 'react'
-
+import axios from 'axios'
+import moment from 'moment'
 
 class CustomTimer extends React.Component {
   constructor(props){
@@ -10,17 +11,28 @@ class CustomTimer extends React.Component {
       time: 0,
       start: 0,
       isOn: false,
-      sentInvoice: false
+      sentInvoice: false,
+      startTime: null
     }
     this.startTimer = this.startTimer.bind(this)
     this.stopTimer = this.stopTimer.bind(this)
     this.resetTimer = this.resetTimer.bind(this)
   }
   startTimer() {
+
+    const now = new Date();
+    const nowUnix = ( moment(now).unix() ) * 1000
+    console.log(now)
+    console.log(nowUnix)
+    const isoString = now.toISOString();
+    console.log(moment(isoString).unix() * 1000)
+    console.log(now.getTime())
+
     this.setState({
       time: this.state.time,
       start: Date.now() - this.state.time,
-      isOn: true
+      isOn: true,
+      startTime: isoString
     })
     this.timer = setInterval(() => this.setState({
       time: Date.now() - this.state.start
@@ -40,6 +52,38 @@ class CustomTimer extends React.Component {
   }
 
   createInvoice = () => {
+
+    const ms = moment(this.state.startTime).unix() * 1000
+    const total = ms + this.state.time
+    const endTime = moment(total).unix() * 1000
+
+    const timeEntry = {
+      start: this.state.startTime,
+      end: endTime,
+      billable: true,
+      description: "Billed meeting",
+      projectId: process.env.PROJECT_ID,
+    }
+
+    axios
+    .post('https://api.clockify.me/api/v1/workspaces/5cf6e9a6b07987371ebcf369/time-entries', {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Api-Key' : 'XPbc4lnaZRbCOFAB'
+      },
+      timeEntry
+    } 
+    ).then(res => {
+      console.log(res)
+      this.setState({
+        client: res.data[0].name,
+        clientPic: 'https://www.pinclipart.com/picdir/middle/12-129912_clip-art-images-sad-face-icon-png-transparent.png'
+      }) 
+    }).catch(err => {
+      console.log(err)
+    }) 
+
+
     this.setState({
       sentInvoice: !this.state.sentInvoice
     })
