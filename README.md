@@ -31,12 +31,10 @@ That should fire up your front end on port 3000. For the lightning invoicing to 
 
 ## How To Use
 
-Choose a case and client with the dropdowns in the top left corner of the app.
-Start your timer by clicking the start button.
-The time will begin to run, and you will be able to see how long it's running (in seconds)
-As the clock runs, the number of satoshis earned for your time will update.
-Click 'stop' to pause the timer. You can resume or, if you want to end the session and create a lightning invoice to send to your client, click the 'Stack sats' button.
-On clicking the 'Stack sats' button the app will generate an invoice payable to your node (this will only work if: (1) you have downloaded the backend to this app and it is running, AND (2) you configured the backend with your lightning node's information. See the README in the backend repository for how to do this.
+* Choose a case and client with the dropdowns in the top left corner of the app.
+* Start your timer by clicking the start button. The time will begin to run, and you will be able to see how long it's running (in seconds). As the clock runs, the number of satoshis earned for your time will update.
+* Click 'stop' to pause the timer. You can resume or, if you want to end the session and create a lightning invoice to send to your client, click the 'Stack sats' button.
+* On clicking the 'Stack sats' button the app will generate an invoice payable to your node (this will only work if: (1) you have downloaded the backend to this app and it is running, AND (2) you configured the backend with your lightning node's information. See the README in the backend repository for how to do this.
 
 And that's it! The app is very simple right now. I had about a week to build it in my sparetime in order to meet the deadline for the hackathon, so it's not very polished. Hopefully I can improve on it in the future!
 
