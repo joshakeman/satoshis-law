@@ -3,6 +3,7 @@ import { Button, ButtonGroup, Alert } from 'reactstrap';
 import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
+var QRCode = require('qrcode.react');
 
 class CustomTimer extends React.Component {
   constructor(props){
@@ -51,7 +52,13 @@ class CustomTimer extends React.Component {
 
   }
   resetTimer() {
-    this.setState({time: 0})
+    this.setState({
+      time: 0,
+      paymentRequest: null,
+      durationHours: null,
+      durationMinutes: null,
+      durationSeconds: null,
+    })
   }
 
   createInvoice = () => {
@@ -105,6 +112,21 @@ class CustomTimer extends React.Component {
     }
 
     setTimeout(removeAlert, 2000)
+
+    const invoiceTime = {
+      time: this.state.time * .02
+    }
+    axios.post('http://localhost:3001/api/posts', invoiceTime)
+    .then(res => {
+      console.log(res)
+      this.setState ({
+        paymentRequest: res.data.data.paymentRequest
+      })
+
+    }).catch(err => {
+      console.log(err)
+    }) 
+
   }
   render() {
     let start = (this.state.time === 0) ?
@@ -125,10 +147,11 @@ class CustomTimer extends React.Component {
       <Button className="button" color="primary" onClick={this.startTimer}>resume</Button> :
       null
     return(
+      <>
       <div className="wrapper">
         <div className="buttons-wrapper">
           {this.state.durationHours === null 
-          ? <h3 >{`Timer: ${parseInt(this.state.time)}`}</h3>
+          ? <h3 >{`Timer: ${moment.duration(parseInt(this.state.time)).as('seconds')}`}</h3>
           : <div><h3>Duration: </h3> <h4>{`Timer: ${parseInt(this.state.time)}`}</h4><h4>{`Hours billed: ${this.state.durationHours} Minutes: ${this.state.durationMinutes} seconds: ${this.state.durationSeconds}`}</h4></div>
 
           }
@@ -143,15 +166,34 @@ class CustomTimer extends React.Component {
             </ButtonGroup>
             <div className="alert-wrapper">
               { this.state.sentInvoice === true ?
+              <div className="">
                 <Alert color="primary">
                 Your time was logged and your invoice was sent!
                 </Alert>
+              </div>
               : null }
+                
             </div>
           </div>
         </div>
-        
+        {/* <div>
+        <h4>Invoice: </h4>
+          {this.state.paymentRequest}     
+        </div> */}
       </div>
+      {this.state.paymentRequest ? 
+        <div className="invoice-box-wrapper">
+          <div className="invoice-box">
+            <h4>Invoice: </h4>
+            <p>{this.state.paymentRequest}</p>
+          </div>
+        <QRCode value={this.state.paymentRequest} className="qr-code"/>
+        </div>
+
+        : null
+      }
+
+      </>
     )
   }
 }
