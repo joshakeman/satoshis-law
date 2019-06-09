@@ -4,14 +4,14 @@
 
 Special thanks to William O'Beirne for writing a Lightning App tutorial, which I relied on to get the backend of my application communicating with my lightning node. That tutorial can be found here: https://medium.com/@wbobeirne/making-a-lightning-web-app-part-1-4a13c82f3f78
 
-##Technologies
+## Technologies
 
 * React
 * Node
 * Express
 * Bootstrap/Reactstrap
 
-##APIs
+## APIs
 
 * Clockify (for logging time sessions) https://clockify.me/developers-api
 
